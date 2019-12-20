@@ -1,5 +1,7 @@
 variable "nvm" {
-    default = 10
+  type        = number
+  default     = 10
+  description = "number of vms to instance"
 }
 
 variable "vol_size" {
