@@ -1,4 +1,4 @@
-resource "openstack_blockstorage_volume_v1" "vol" {
+resource "openstack_blockstorage_volume_v2" "vol" {
   count = var.nvm
   name        = "stress-test-vol${count.index}"
   description = "stress test volume"
@@ -18,7 +18,7 @@ resource "openstack_compute_instance_v2" "vms" {
   }
   
   block_device {
-    uuid                  = openstack_blockstorage_volume_v1.vol[count.index].id
+    uuid                  = openstack_blockstorage_volume_v2.vol[count.index].id
     source_type           = "volume"
     boot_index            = 0
     destination_type      = "volume"

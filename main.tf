@@ -1,4 +1,6 @@
-provider "openstack" {}
+provider "openstack" {
+    tenant_id = "b289ad57d6a74b7b8d9dfefbcee272bd"
+}
 
 module "instancies" {
     source = "./instancies"
