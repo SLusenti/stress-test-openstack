@@ -18,4 +18,5 @@ module "instancies" {
     image = module.images.id
     network = module.network.network
     vol_type = var.vol_type
+    floating_ip_pool = var.floating_ip_pool
 }

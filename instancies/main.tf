@@ -14,6 +14,9 @@ resource "openstack_compute_flavor_v2" "test_flavor" {
   disk  = "20"
 }
 
+resource "openstack_networking_floatingip_v2" "floatip_1" {
+  pool = var.floating_ip_pool
+}
 
 resource "openstack_compute_secgroup_v2" "test_scurity" {
   name        = "test_scurity"

@@ -24,3 +24,7 @@ variable "vol_type" {
   type        = string
   description = "volume type"
 }
+
+variable "floating_ip_pool" {
+  type        = string
+}
