@@ -15,11 +15,6 @@ variable "image" {
   description = "image name"
 }
 
-variable "flavor" {
-  type        = string
-  description = "flavor name"
-}
-
 variable "network" {
   type        = string
   description = "network name"

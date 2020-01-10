@@ -8,22 +8,11 @@ variable "vol_size" {
   description = "default volume size"
 }
 
-variable "image" {
-  type        = string
-  description = "image name"
-}
-
-variable "flavor" {
-  type        = string
-  description = "flavor name"
-}
-
-variable "network" {
-  type        = string
-  description = "network name"
-}
-
 variable "vol_type" {
   type        = string
   description = "volume type"
+}
+
+variable "external_network_id" {
+  type        = string
 }
