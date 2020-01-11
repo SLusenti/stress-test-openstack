@@ -1,6 +1,11 @@
 # usage
+
+read `vars.tf` file for the configurations
+
 ```bash
-source ./openstackrc
+# use OS_TENANT_ID instead of OS_TENANT_NAME in the openstackrc file
+source ./openstackrc 
+
 cd project
 terraform init
 terraform apply
