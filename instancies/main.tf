@@ -1,21 +1,10 @@
-resource "openstack_blockstorage_volume_v2" "vol" {
+resource "openstack_blockstorage_volume_v3" "vol" {
   count = var.nvm
   name        = "stress-test-vol${count.index}"
   description = "stress test volume"
   size        = var.vol_size
   volume_type = var.vol_type
-  image_id = data.openstack_images_image_v2.img.id
-}
-
-resource "openstack_compute_flavor_v2" "test_flavor" {
-  name  = "test_flavor"
-  ram   = "1024"
-  vcpus = "2"
-  disk  = "20"
-}
-
-resource "openstack_networking_floatingip_v2" "floatip_1" {
-  pool = var.floating_ip_pool
+  image_id = var.image
 }
 
 resource "openstack_compute_secgroup_v2" "test_scurity" {
@@ -38,8 +27,8 @@ resource "openstack_compute_instance_v2" "vms" {
   count = var.nvm
   name            = "stress-test${count.index}"
   image_id       = var.image
-  flavor_name       = openstack_compute_flavor_v2.test_flavor.name
-  security_groups = openstack_compute_secgroup_v2.test_scurity.id
+  flavor_name       = "stress_test_flavor"
+  security_groups = [ openstack_compute_secgroup_v2.test_scurity.id ]
   key_pair = openstack_compute_keypair_v2.test_keypair.name
 
   network {
@@ -47,12 +36,23 @@ resource "openstack_compute_instance_v2" "vms" {
   }
   
   block_device {
-    uuid                  = openstack_blockstorage_volume_v2.vol[count.index].id
+    uuid                  = openstack_blockstorage_volume_v3.vol[count.index].id
     source_type           = "volume"
     boot_index            = 0
     destination_type      = "volume"
     delete_on_termination = true
   }
+}
+
+resource "openstack_compute_floatingip_v2" "floatip_1" {
+  count = var.nvm
+  pool = var.floating_ip_pool
+}
+
+resource "openstack_compute_floatingip_associate_v2" "fip_1" {
+  count = var.nvm
+  floating_ip = openstack_compute_floatingip_v2.floatip_1[count.index].address
+  instance_id = openstack_compute_instance_v2.vms[count.index].id
 }
 
 output "private_key" {

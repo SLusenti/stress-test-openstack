@@ -1,5 +1,5 @@
 variable "nvm" {
-    default = 10
+    default = 20
 }
 
 variable "vol_size" {
@@ -10,13 +10,15 @@ variable "vol_size" {
 
 variable "vol_type" {
   type        = string
-  description = "volume type"
+  default = "Standard"
 }
 
 variable "external_network_id" {
   type        = string
+  default = "08762b26-c70c-4705-9155-ef424bbfa4f4"
 }
 
 variable "floating_ip_pool" {
   type        = string
+  default = "ext-net"
 }

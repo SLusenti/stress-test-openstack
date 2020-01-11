@@ -1,6 +1,4 @@
-provider "openstack" {
-    tenant_id = "b289ad57d6a74b7b8d9dfefbcee272bd"
-}
+provider "openstack" {}
 
 module "network" {
     source = "./network"
@@ -19,4 +17,13 @@ module "instancies" {
     network = module.network.network
     vol_type = var.vol_type
     floating_ip_pool = var.floating_ip_pool
+}
+
+output "image_id" {
+  value       = module.images.id
+}
+
+output "private_key" {
+  value       = module.instancies.private_key
+  description = ""
 }

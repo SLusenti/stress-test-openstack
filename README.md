@@ -13,4 +13,3 @@ terraform apply  -var 'external_network_id=[external_network_id]' \
 -var 'nvm=[number_of_istancies]' \
 -var 'floating_ip_pool=[floating_ip_pool]'
 ```
-
