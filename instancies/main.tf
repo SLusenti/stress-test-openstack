@@ -26,9 +26,8 @@ resource "openstack_compute_keypair_v2" "test_keypair" {
 resource "openstack_compute_instance_v2" "vms" {
   count = var.nvm
   name            = "stress-test${count.index}"
-  image_id       = var.image
   flavor_name       = "stress_test_flavor"
-  security_groups = [ openstack_compute_secgroup_v2.test_scurity.id ]
+  security_groups = [ openstack_compute_secgroup_v2.test_scurity.name ]
   key_pair = openstack_compute_keypair_v2.test_keypair.name
 
   network {
@@ -40,7 +39,7 @@ resource "openstack_compute_instance_v2" "vms" {
     source_type           = "volume"
     boot_index            = 0
     destination_type      = "volume"
-    delete_on_termination = true
+    delete_on_termination = false
   }
 }
 
@@ -57,4 +56,8 @@ resource "openstack_compute_floatingip_associate_v2" "fip_1" {
 
 output "private_key" {
   value       = openstack_compute_keypair_v2.test_keypair.private_key
+}
+
+output "vms" {
+  value       = openstack_compute_instance_v2.vms
 }

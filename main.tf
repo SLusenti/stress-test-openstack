@@ -27,3 +27,7 @@ output "private_key" {
   value       = module.instancies.private_key
   description = ""
 }
+
+output "vms" {
+  value       = module.instancies.vms
+}
