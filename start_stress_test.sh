@@ -1,6 +1,6 @@
 #!/bin/bash
-cd /home/selu/MEGA/cisco_workspace/repos/terraform/openstack-stress-test
-. .terraform/openrc
+
+. openstackrc
 cd project
 terraform init
 terraform apply
