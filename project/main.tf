@@ -40,9 +40,9 @@ resource "openstack_compute_quotaset_v2" "quotaset_1" {
 
 resource "openstack_compute_flavor_v2" "test_flavor" {
   name  = "stress_test_flavor"
-  ram   = "1024"
-  vcpus = "2"
-  disk  = "20"
+  ram   = "4096"
+  vcpus = "4"
+  disk  = "40"
 }
 
 resource "openstack_compute_flavor_access_v2" "access_1" {

@@ -26,7 +26,7 @@ resource "openstack_compute_keypair_v2" "test_keypair" {
 resource "openstack_compute_instance_v2" "vms" {
   count = var.nvm
   name            = "stress-test${count.index}"
-  flavor_name       = "stress_test_flavor"
+  flavor_name       = "m1.medium"
   security_groups = [ openstack_compute_secgroup_v2.test_scurity.name ]
   key_pair = openstack_compute_keypair_v2.test_keypair.name
 

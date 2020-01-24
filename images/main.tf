@@ -1,10 +1,10 @@
-resource "openstack_images_image_v2" "ubuntu_1804_minimal" {
-  name             = "ubuntu_1804_minimal"
-  image_source_url = "http://cloud-images.ubuntu.com/minimal/releases/bionic/release-20180705/ubuntu-18.04-minimal-cloudimg-amd64.img"
+resource "openstack_images_image_v2" "img" {
+  name             = "stress_test_cloudimg"
+  image_source_url = "https://download.fedoraproject.org/pub/fedora/linux/releases/31/Cloud/x86_64/images/Fedora-Cloud-Base-31-1.9.x86_64.qcow2"
   container_format = "bare"
-  disk_format      = "raw"
+  disk_format      = "qcow2"
 }
 
 output "id" {
-  value       = openstack_images_image_v2.ubuntu_1804_minimal.id
+  value       = openstack_images_image_v2.img.id
 }
