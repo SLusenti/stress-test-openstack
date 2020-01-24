@@ -4,13 +4,19 @@ provider "openstack" {
 resource "openstack_identity_project_v3" "project_1" {
   name        = "stress-test-prj"
   description = "stress test project"
-  domain_id = "6f8c034c9fa7443c91ec720604507384"
+  domain_id = var.domain_id
 }
 
-resource "openstack_identity_role_assignment_v3" "role_assignment_1" {
-  user_id    = "01c04464bb3d4ed0a7d3d363294fd336"
+resource "openstack_identity_role_assignment_v3" "role_assignment_admin" {
+  user_id    = var.user_id
   project_id = openstack_identity_project_v3.project_1.id
-  role_id    = "bd189412bd5a48cd89f94e03cf256621"
+  role_id    = data.openstack_identity_role_v3.admin.id
+}
+
+resource "openstack_identity_role_assignment_v3" "role_assignment_member" {
+  user_id    = var.user_id
+  project_id = openstack_identity_project_v3.project_1.id
+  role_id    = data.openstack_identity_role_v3.member.id
 }
 
 resource "openstack_blockstorage_quotaset_v2" "quotaset_1" {

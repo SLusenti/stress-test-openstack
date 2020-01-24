@@ -1,5 +1,5 @@
 variable "nvm" {
-    default = 40
+    default = 80
 }
 
 variable "vol_size" {
