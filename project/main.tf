@@ -44,6 +44,19 @@ resource "openstack_compute_quotaset_v2" "quotaset_1" {
   server_groups               = 4
 }
 
+resource "openstack_networking_quota_v2" "quota_1" {
+  project_id          = openstack_identity_project_v3.project_1.id
+  floatingip          = 90
+  network             = 4
+  port                = 1000
+  rbac_policy         = 10
+  router              = 4
+  security_group      = 100
+  security_group_rule = 1000
+  subnet              = 8
+  subnetpool          = 2
+}
+
 resource "openstack_compute_flavor_v2" "test_flavor" {
   name  = "stress_test_flavor"
   ram   = "4096"
