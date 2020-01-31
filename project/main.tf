@@ -7,14 +7,37 @@ resource "openstack_identity_project_v3" "project_1" {
   domain_id = var.domain_id
 }
 
-resource "openstack_identity_role_assignment_v3" "role_assignment_admin" {
+resource "openstack_identity_user_v3" "user_1" {
+  default_project_id = openstack_identity_project_v3.project_1.id
+  name               = "stress_test_user"
+  description        = "stress_test_prj admin"
+  password = "20dontstressme!20"
+  enabled = true
+  domain_id = var.domain_id
+  ignore_change_password_upon_first_use = true
+  multi_factor_auth_enabled = false
+}
+
+resource "openstack_identity_role_assignment_v3" "role_assignment_admin_admin" {
   user_id    = var.user_id
   project_id = openstack_identity_project_v3.project_1.id
   role_id    = data.openstack_identity_role_v3.admin.id
 }
 
-resource "openstack_identity_role_assignment_v3" "role_assignment_member" {
+resource "openstack_identity_role_assignment_v3" "role_assignment_admin_member" {
   user_id    = var.user_id
+  project_id = openstack_identity_project_v3.project_1.id
+  role_id    = data.openstack_identity_role_v3.member.id
+}
+
+resource "openstack_identity_role_assignment_v3" "role_assignment_admin_user_1" {
+  user_id    = openstack_identity_user_v3.user_1.id
+  project_id = openstack_identity_project_v3.project_1.id
+  role_id    = data.openstack_identity_role_v3.admin.id
+}
+
+resource "openstack_identity_role_assignment_v3" "role_assignment_member_user_1" {
+  user_id    = openstack_identity_user_v3.user_1.id
   project_id = openstack_identity_project_v3.project_1.id
   role_id    = data.openstack_identity_role_v3.member.id
 }
