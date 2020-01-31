@@ -2,8 +2,8 @@
 
 . openstackrc
 cd project
-terraform init -var "domain_id=$1" -var "user_id=$2"
-terraform apply -var "domain_id=$1" -var "user_id=$2" <<< yes
+terraform init -var "domain_id=$1" -var "user_id=$2" -var "user_pssswd=password" 
+terraform apply -var "domain_id=$1" -var "user_id=$2" -var "user_pssswd=password"  <<< yes
 P_ID=$(terraform output proj_id)
 cd ..
 echo "p_id: $P_ID"

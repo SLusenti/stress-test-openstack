@@ -22,3 +22,7 @@ variable "floating_ip_pool" {
   type        = string
   default = "ext-net"
 }
+
+variable "user_pssswd" {
+  type        = string
+}
