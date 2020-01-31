@@ -8,7 +8,11 @@ P_ID=$(terraform output proj_id)
 cd ..
 echo "p_id: $P_ID"
 unset OS_TENANT_ID
+unset OS_USERNAME
+unset OS_PASSWORD
 export OS_TENANT_ID="${P_ID}"
+export OS_USERNAME='stress_test_user'
+export OS_PASSWORD='password'
 terraform init
 terraform apply <<< yes
 # hear the part for vms backup

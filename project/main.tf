@@ -11,7 +11,7 @@ resource "openstack_identity_user_v3" "user_1" {
   default_project_id = openstack_identity_project_v3.project_1.id
   name               = "stress_test_user"
   description        = "stress_test_prj admin"
-  password = "20dontstressme!20"
+  password = "password"
   enabled = true
   domain_id = var.domain_id
   ignore_change_password_upon_first_use = true
